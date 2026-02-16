@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="has-transitions">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Get in touch — PhenonSpace</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e6edf5;
+
+      --purple:#5A27B7;
+      --purple-2:#4b20a0;
+      --accent:#F39C12;       /* orange button */
+      --accent-2:#d88405;
+
+      --radius:18px;
+      --shadow:0 18px 60px rgba(15,23,42,.12);
+      --shadow-sm:0 8px 24px rgba(15,23,42,.08);
+
+      --footer-bg:#16181d;    /* dark footer like screenshot */
+      --footer-ink:#cbd5e1;
+      --footer-head:#ffffff;
+      --footer-rule:#4b2ab8;  /* purple rule under headers */
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+
+    /* Top minimalist nav + crumbs (to echo screenshot spacing) */
+    .topbar{border-bottom:1px solid var(--line); background:#fff}
+    .nav{max-width:1200px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand img{height:58px;width:120px;}
+    .menu{display:flex;gap:28px;align-items:center}
+    .menu a{font-weight:600;opacity:.9;text-decoration:none}
+    .cta{background:var(--purple);color:#fff;padding:10px 16px;border-radius:10px;font-weight:800;text-decoration:none}
+    .crumbs{max-width:1200px;margin:8px auto 0;padding:0 20px;color:#64748b;font-size:12px}
+
+    /* Main layout */
+    .wrap{max-width:1200px;margin:24px auto 72px;padding:0 20px}
+    .grid{display:grid;grid-template-columns:1.1fr .95fr;gap:28px}
+    @media (max-width:1024px){ .grid{grid-template-columns:1fr} }
+
+    /* Left card (purple) */
+    .card-purple{background:var(--purple);color:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:relative}
+    .card-purple::before{
+      content:"";position:absolute;inset:0;
+      background:url('https://stepico.com/wp-content/uploads/2023/11/Rectangle-35.jpg') center/cover no-repeat;
+      mix-blend:screen;opacity:.22;pointer-events:none
+    }
+    .card-body{position:relative;padding:28px}
+    .h4{font-size:30px;font-weight:900;letter-spacing:.4px;margin:0 0 6px}
+    .lead{opacity:.95;line-height:1.5;font-size:14px;margin-bottom:18px}
+
+    /* Form */
+    .form{display:flex;flex-direction:column;gap:14px;max-width:680px}
+    .form input[type="text"], .form input[type="email"], .form textarea{
+      width:100%;border:0;outline:none;border-radius:10px;
+      padding:16px 18px;font-size:14px;background:#fff;color:#0f172a;box-shadow:var(--shadow-sm)
+    }
+    .form textarea{min-height:150px;resize:vertical}
+    .consent{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#f0eaff;margin-top:4px}
+    .consent a{color:#fff;text-decoration:underline}
+    .btn-wrap{display:flex;align-items:center;gap:10px;margin-top:6px}
+    .btn{border:0;cursor:pointer;border-radius:12px;padding:14px 20px;font-weight:800;letter-spacing:.2px;background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(243,156,18,.35)}
+    .btn:hover{background:var(--accent-2)}
+    .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:100%;display:none;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .status{margin-top:6px;font-size:12px;min-height:18px}
+    .ok{color:#bbf7d0}.err{color:#fecaca}
+
+    /* Right column */
+    .manager{background:var(--purple);color:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+    .manager .inner{padding:18px 20px;display:flex;gap:14px;align-items:center}
+    .manager .avatar{width:64px;height:64px;border-radius:100%;border:3px solid rgba(255,255,255,.25);object-fit:cover}
+    .manager small{opacity:.8;display:block}
+    .manager h3{margin:2px 0 2px;font-size:22px;letter-spacing:.2px}
+    .manager a{color:#ffdcae;text-decoration:none}
+
+    .offices{margin-top:18px}
+    .offices h4{font-size:22px;font-weight:900;letter-spacing:.4px;margin:0 0 8px}
+    .office{display:grid;grid-template-columns:20px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+    .office:last-child{border-bottom:0}
+    .pin{color:#f59e0b;margin-top:2px}
+    .robot{margin-top:18px;display:flex;justify-content:flex-end}
+    .robot img{width:160px}
+
+    /* Footer like screenshot (no links in content) */
+    footer{background:var(--footer-bg);color:var(--footer-ink);padding:36px 20px;border-top:1px solid #0f172a}
+    .foot{max-width:1200px;margin:0 auto}
+    .foot-top{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+    .foot-top img{height:28px}
+    .foot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:34px}
+    @media (max-width:980px){ .foot-grid{grid-template-columns:1fr 1fr} }
+    @media (max-width:620px){ .foot-grid{grid-template-columns:1fr} }
+    .foot-col h6{color:var(--footer-head);margin:0 0 12px;font-size:12px;letter-spacing:.15em;text-transform:uppercase}
+    .rule{height:2px;width:72px;background:var(--footer-rule);border-radius:1px;margin:6px 0 10px}
+    .foot-col .title{color:#fff;font-weight:700;margin:10px 0 8px}
+    .foot-col ul{list-style:none;padding:0;margin:0}
+    .foot-col li{padding:4px 0;color:var(--footer-ink);opacity:.95}
+    .foot-addr .contact-btn{display:inline-block;background:#5c2bd5;color:#fff;padding:12px 16px;border-radius:10px;font-weight:800;margin:10px 0 6px}
+    .foot-socials{display:flex;gap:10px;margin-top:8px}
+    .foot-socials .icon{width:36px;height:36px;border-radius:18px;background:#0f1116;color:#fff;display:grid;place-items:center}
+
+    .foot-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:22px;padding-top:14px;font-size:12px;display:flex;justify-content:space-between;gap:10px}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="topbar">
+    <div class="nav">
+      <div class="brand">
+        <!-- replace with your logo -->
+        <img src="Phenon (1).png" alt="PhenonSpace">
+      </div>
+      <div class="menu">
+        <a href="services.html">SERVICES</a>
+        <a href="projects.html">OUR PROJECTS</a>
+        <a href="art.html">GAME ART PORTFOLIO</a>
+        <a href="company.html">COMPANY</a>
+        <a href="blog.html">BLOG</a>
+        <a class="cta" href="#">CONTACT US</a>
+      </div>
+    </div>
+   
+  </div>
+  <div class="crumbs">Home / Get in touch</div>
+
+  <!-- MAIN -->
+  <main class="wrap">
+    <div class="grid">
+      <!-- LEFT: Purple card with form -->
+      <section class="card-purple">
+        <div class="card-body">
+          <h1 class="h4">GET IN TOUCH</h1>
+          <p class="lead">Want to discuss your product or partnership?<br>We’re always ready to help.</p>
+
+          <form class="form" id="contactForm" novalidate>
+            <input type="text" name="full_name" placeholder="Full name" required />
+            <input type="email" name="email" placeholder="Email address" required />
+            <textarea name="message" placeholder="Outline your project details" required></textarea>
+
+            <label class="consent">
+              <input type="checkbox" id="consent" required>
+              <span>
+                <b style="color:#ffd1d1;">*</b> I give consent to the processing of my personal data given
+                in the contact form above under the terms and conditions of Stepico
+                <u>Privacy Policy</u>.
+              </span>
+            </label>
+
+            <div class="btn-wrap">
+              <button class="btn" type="submit">GET IN TOUCH</button>
+              <span class="spinner" id="spinner"></span>
+            </div>
+            <div class="status" id="status"></div>
+
+            <!-- Honeypot -->
+            <input type="text" name="hp_field" style="display:none" tabindex="-1" autocomplete="off">
+          </form>
+        </div>
+      </section>
+
+      <!-- RIGHT: Manager + Offices + Robot -->
+      <aside>
+        <div class="manager">
+          <div class="inner">
+            <img class="avatar" src="https://stepico.com/wp-content/uploads/2024/07/Dmytro_2-480x480.jpg" alt="Manager">
+            <div>
+              <small>Meet our sales manager</small>
+              <h3>DMYTRO KOVALENKO</h3>
+              <span style="color:#ffdcae;">Phenonspaceio@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="offices">
+          <h4>OUR OFFICES:</h4>
+
+          <div class="office">
+            <i class="fa-solid fa-location-dot pin"></i>
+            <div><strong>USA OFFICE:</strong><br>NY, NEW YORK CITY, USA, 10016</div>
+          </div>
+
+          <div class="office">
+            <i class="fa-solid fa-location-dot pin"></i>
+            <div><strong>UKRAINE OFFICE:</strong><br>L’VIV, UKRAINE, 79000</div>
+          </div>
+
+          <div class="office">
+            <i class="fa-solid fa-location-dot pin"></i>
+            <div><strong>CYPRUS OFFICE:</strong><br>LIMASSOL, CYPRUS, 3041</div>
+          </div>
+
+          <div class="office">
+            <i class="fa-solid fa-location-dot pin"></i>
+            <div><strong>AUSTRALIAN STUDIO:</strong><br>SYDNEY, NSW, AUSTRALIA</div>
+          </div>
+        </div>
+
+        <div class="robot">
+          <!-- replace with your robot image -->
+          <img src="https://stepico.com/wp-content/uploads/2023/11/4-1-2.png" alt="Robot">
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER (no links in lists) -->
+  <footer>
+    <div class="foot">
+      <div class="foot-top">
+        
+      </div>
+
+      <div class="foot-grid">
+        <div class="foot-col">
+          <h6>SERVICES</h6>
+          <div class="rule"></div>
+
+          <div class="title">DEVELOPMENT</div>
+          <ul>
+            <li>Custom Game Development</li>
+            <li>Unity Game Development</li>
+            <li>Mobile Game Development</li>
+            <li>iOS Game Development</li>
+            <li>Android Game Development</li>
+            <li>3D Game Development</li>
+            <li>Live Game Operation</li>
+            <li>Blockchain Games</li>
+            <li>Unreal Game Development</li>
+            <li>Marketing Games</li>
+            <li>Educational Games</li>
+            <li>Tap-to-Earn Game Development</li>
+            <li>Web3 Game Development</li>
+            <li>NFT Game Development</li>
+            <li>VR Game Development</li>
+            <li>AI Game Development</li>
+          </ul>
+
+          <div class="title" style="margin-top:10px;">ART</div>
+          <ul>
+            <li>Game Art Production</li>
+            <li>2D Art</li>
+            <li>3D Art</li>
+            <li>2D Animation Services</li>
+            <li>3D Animation Services</li>
+            <li>Game Animation</li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h6>OUR PROJECTS</h6>
+          <div class="rule"></div>
+          <ul>
+            <li>Discovery</li><li>BIGFOOT</li><li>Loaded Lions: Mane City</li>
+            <li>Snowy Island</li><li>Guild Of Guardians</li><li>Fishing Rival</li>
+            <li>MetaPopit</li><li>Century Siege</li><li>Nile Valley</li>
+            <li>Hero Ring</li><li>MMA Manager</li><li>Alien 911</li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h6>COMPANY</h6>
+          <div class="rule"></div>
+          <ul>
+            <li>Game Art portfolio</li>
+            <li>Company</li>
+            <li>Careers</li>
+          </ul>
+        </div>
+
+        <div class="foot-col foot-addr">
+          <h6>ADDRESS</h6>
+          <div class="rule"></div>
+          <ul>
+            <li><strong>USA Office:</strong><br>NY, New York City, USA, 10016</li>
+            <li style="margin-top:10px;"><strong>Ukraine Office:</strong><br>L’viv, Ukraine, 79000</li>
+            <li style="margin-top:10px;"><strong>Cyprus Office:</strong><br>Limassol, Cyprus, 3041</li>
+            <li style="margin-top:10px;"><strong>Australian Studio:</strong><br>Sydney, NSW, Australia</li>
+          </ul>
+
+          <div class="contact-btn">CONTACT US</div>
+
+          <div style="margin-top:10px;">Follow us:</div>
+          <div class="foot-socials">
+            <div class="icon"><i class="fa-brands fa-facebook-f"></i></div>
+            <div class="icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="icon"><i class="fa-brands fa-behance"></i></div>
+            <div class="icon"><i class="fa-brands fa-dribbble"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <div>© 2025 PhenonSpace Games. All rights reserved.</div>
+        <div>Privacy Policy</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal" aria-hidden="true" style="position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(3px)">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="ok-title" style="background:#fff;color:#0f172a;border-radius:18px;max-width:420px;width:92%;padding:22px;box-shadow:var(--shadow);text-align:center">
+      <div class="icon" style="font-size:44px;margin-bottom:8px;color:#16a34a"><i class="fa-solid fa-circle-check"></i></div>
+      <h3 id="ok-title" style="margin:0 0 6px">Message sent!</h3>
+      <p style="margin:0 0 16px;color:#475569">Thanks for reaching out. We’ll get back to you shortly.</p>
+      <button class="close" id="closeModal" style="background:var(--purple);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer">Great</button>
+    </div>
+  </div>
+
+  <!-- EmailJS SDK -->
+  
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init({ publicKey: "_njMaMIRi9owVcQXz" });
+
+  const form    = document.getElementById('contactForm');
+  const spinner = document.getElementById('spinner');
+  const statusE = document.getElementById('status');
+  const modal   = document.getElementById('successModal');
+
+  const busy = b => { spinner.style.display = b ? 'inline-block' : 'none'; form.querySelector('.btn').disabled = b; };
+  const msg  = (t, ok=false) => { statusE.textContent = t || ''; statusE.className = 'status ' + (ok?'ok':'err'); };
+  const open = () => { modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); };
+  const close= () => { modal.style.display='none'; modal.setAttribute('aria-hidden','true'); };
+  document.getElementById('closeModal')?.addEventListener('click', close);
+  modal?.addEventListener('click', e => { if (e.target === modal) close(); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg('');
+
+    const name    = form.querySelector('input[name="full_name"]')?.value.trim() || '';
+    const email   = form.querySelector('input[name="email"]')?.value.trim() || '';
+    const message = form.querySelector('textarea[name="message"]')?.value.trim() || '';
+    const consent = document.getElementById('consent')?.checked ?? true;
+    const trap    = form.querySelector('input[name="hp_field"]')?.value || '';
+
+    if (trap) return;                         // bot
+    if (!consent) return msg('Please accept the Privacy Policy to continue.');
+    if (!name || !email || !message) return msg('Please fill in your name, email, and project details.');
+
+    const params = { from_name: name, reply_to: email, message };
+
+    console.log('[EmailJS params]', params);  // should show your actual values
+
+    busy(true);
+    try {
+      const res = await emailjs.send("service_x5rhxuw", "template_jkrs2fr", params);
+      console.log('[EmailJS response]', res);
+      msg('Thanks! Your message has been sent.', true);
+      form.reset();
+      open();
+    } catch (err) {
+      console.error('[EmailJS error]', err);
+      msg('Sorry, something went wrong. Please try again.');
+    } finally {
+      busy(false);
+    }
+  });
+</script>
+
+</body>
+</html>
